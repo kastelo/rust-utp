@@ -11,17 +11,17 @@ repository = "https://github.com/meqif/rust-utp"
 version = "0.7.1-pre"
 
 [dependencies]
-env_logger = "0.3"
-log = "0.3"
-num-traits = "0.1"
-rand = "0.3"
+env_logger = "0.7.1"
+log = "0.4.8"
+num-traits = "0.2.11"
+rand = "0.7.3"
 
 [dependencies.clippy]
 optional = true
-version = "0.0.131"
+version = "0.0.302"
 
 [dev-dependencies]
-quickcheck = "0.4"
+quickcheck = "0.9.2"
 
 [lib]
 name = "utp"

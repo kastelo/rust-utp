@@ -1,8 +1,8 @@
-extern crate utp;
 extern crate env_logger;
+extern crate utp;
 
-use utp::{UtpListener, UtpSocket};
 use std::thread;
+use utp::{UtpListener, UtpSocket};
 
 fn handle_client(mut s: UtpSocket) {
     let mut buf = [0; 1500];
@@ -13,13 +13,13 @@ fn handle_client(mut s: UtpSocket) {
             println!("<= [{}] {:?}", src, &buf[..nread]);
             let _ = s.send_to(&buf[..nread]);
         }
-        Err(e) => println!("{}", e)
+        Err(e) => println!("{}", e),
     }
 }
 
 fn main() {
     // Start logger
-    env_logger::init().expect("Error starting logger");
+    env_logger::init();
 
     // Create a listener
     let addr = "127.0.0.1:8080";
@@ -28,8 +28,10 @@ fn main() {
     for connection in listener.incoming() {
         // Spawn a new handler for each new connection
         match connection {
-            Ok((socket, _src)) => { thread::spawn(move || { handle_client(socket) }); },
-            _ => ()
+            Ok((socket, _src)) => {
+                thread::spawn(move || handle_client(socket));
+            }
+            _ => (),
         }
     }
 }
